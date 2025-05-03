@@ -26,6 +26,7 @@ public class LoginController {
                 if (role.equals("admin")) {
                     loader = new FXMLLoader(getClass().getResource("/view/admin.fxml"));
                 } else {
+                    //session.empid = ; need to send code
                     loader = new FXMLLoader(getClass().getResource("/view/employee.fxml"));
                 }
                 Stage stage = (Stage) emailField.getScene().getWindow();

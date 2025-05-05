@@ -18,6 +18,7 @@ public class AdminController {
     @FXML private TextField ssnField;
     @FXML private TextField salaryField;
     @FXML private TextArea resultArea;
+    @FXML private TextArea dataArea;
 
     // READ
     @FXML
@@ -99,4 +100,15 @@ public class AdminController {
             resultArea.setText("Error during creation.");
         }
     }
+    @FXML
+    private void handleLogout() {
+        try {
+            javafx.fxml.FXMLLoader loader = new javafx.fxml.FXMLLoader(getClass().getResource("/view/login.fxml"));
+            javafx.scene.Scene scene = new javafx.scene.Scene(loader.load());
+            javafx.stage.Stage stage = (javafx.stage.Stage) dataArea.getScene().getWindow();
+            stage.setScene(scene);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }   
 }

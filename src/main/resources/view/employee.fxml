@@ -6,4 +6,5 @@
       fx:controller="employeedata.controller.EmployeeController">
     <Label text="Employee Dashboard" style="-fx-font-size: 20;"/>
     <TextArea fx:id="dataArea" prefHeight="200" editable="false"/>
+    <Button text="Logout" onAction="#handleLogout" />
 </VBox>

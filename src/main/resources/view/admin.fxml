@@ -43,5 +43,6 @@
         </HBox>
 
         <TextArea fx:id="resultArea" editable="false" prefHeight="100" wrapText="true"/>
+        <Button text="Logout" onAction="#handleLogout" />
     </VBox>
 </AnchorPane>

@@ -38,4 +38,15 @@ public class EmployeeController {
             dataArea.setText("Error loading data.");
         }
     }
+    @FXML
+    private void handleLogout() {
+        try {
+            javafx.fxml.FXMLLoader loader = new javafx.fxml.FXMLLoader(getClass().getResource("/view/login.fxml"));
+            javafx.scene.Scene scene = new javafx.scene.Scene(loader.load());
+            javafx.stage.Stage stage = (javafx.stage.Stage) dataArea.getScene().getWindow();    
+            stage.setScene(scene);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }

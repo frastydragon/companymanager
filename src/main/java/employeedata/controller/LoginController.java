@@ -3,6 +3,7 @@ package employeedata.controller;
 import java.io.IOException;
 
 import employeedata.util.Auth;
+import employeedata.util.AuthResult;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -19,18 +20,26 @@ public class LoginController {
 
     @FXML
     private void handleLogin(ActionEvent event) {
-        String role = Auth.authenticate(emailField.getText(), ssnField.getText());
-        if (role != null) {
+        AuthResult result = Auth.authenticate(emailField.getText(), ssnField.getText());
+        if (result != null) {
             try {
                 FXMLLoader loader;
-                if (role.equals("admin")) {
-                    loader = new FXMLLoader(getClass().getResource("/view/admin.fxml"));
-                } else {
-                    //session.empid = ; need to send code
-                    loader = new FXMLLoader(getClass().getResource("/view/employee.fxml"));
-                }
                 Stage stage = (Stage) emailField.getScene().getWindow();
-                stage.setScene(new Scene(loader.load()));
+
+                if (result.role.equals("admin")) {
+                    loader = new FXMLLoader(getClass().getResource("/view/admin.fxml"));
+                    stage.setScene(new Scene(loader.load()));
+                } else {
+                    loader = new FXMLLoader(getClass().getResource("/view/employee.fxml"));
+                    Scene scene = new Scene(loader.load());
+
+                    // Pass employee ID to employee controller
+                    EmployeeController controller = loader.getController();
+                    controller.setEmployeeId(result.empId);
+
+                    stage.setScene(scene);
+                }
+
             } catch (IOException e) {
                 e.printStackTrace();
             }
